@@ -30,10 +30,11 @@ def count_characters(text):
     lowered_string = text.lower()
     words = lowered_string.split()
     for w in words:
-        if w in dict:
-                dict[w] += 1
-        else:
-                dict[w] = 1
+        for c in w:
+            if c in dict:
+                dict[c] += 1
+            else:
+                dict[c] = 1
     return dict
         
 
