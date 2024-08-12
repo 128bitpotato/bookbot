@@ -2,8 +2,11 @@ def main():
     book_path = "books/frankenstein.txt"
     text = get_book_text(book_path)
     word_count = count_words(text)
-    print(text)
+    character_count = count_characters(text)
+    # print(text)
     print(word_count)
+    print(character_count)
+    
     
 def get_book_text(path):    
     with open(path) as f:
@@ -21,5 +24,18 @@ def count_words(text):
 # def get_num_words(text):
 #    words = text.split()
 #    return len(words)
+
+def count_characters(text):
+    dict = {}
+    lowered_string = text.lower()
+    words = lowered_string.split()
+    for w in words:
+        if w in dict:
+                dict[w] += 1
+        else:
+                dict[w] = 1
+    return dict
+        
+
 
 main()
