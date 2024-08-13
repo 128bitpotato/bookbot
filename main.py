@@ -3,9 +3,10 @@ def main():
     text = get_book_text(book_path)
     word_count = count_words(text)
     character_count = count_characters(text)
-    # print(text)
-    print(f"Word count: {word_count}")
-    print(f"Character count: {character_count}")
+    report = gen_report(character_count)
+    # print(f"Word count: {word_count}")
+    # print(f"Character count: {character_count}")
+    print(f"Report: {report}")
     
     
 def get_book_text(path):    
@@ -34,5 +35,8 @@ def count_characters(text):
             dict[character] = 1
     return dict
 
+def gen_report(dict):
+    char_list = [{"char": key, "count": value} for key, value in dict.items() if key.isalpha()]
+    return char_list
 
 main()
