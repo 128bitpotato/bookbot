@@ -27,14 +27,12 @@ def count_words(text):
 
 def count_characters(text):
     dict = {}
-    lowered_string = text.lower()
-    words = lowered_string.split()
-    for w in words:
-        for c in w:
-            if c in dict:
-                dict[c] += 1
+    for words in text.lower().split():
+        for character in words:
+            if character in dict:
+                dict[character] += 1
             else:
-                dict[c] = 1
+                dict[character] = 1
     return dict
         
 
