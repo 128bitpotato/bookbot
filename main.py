@@ -4,8 +4,8 @@ def main():
     word_count = count_words(text)
     character_count = count_characters(text)
     # print(text)
-    print(word_count)
-    print(character_count)
+    print(f"Word count: {word_count}")
+    print(f"Character count: {character_count}")
     
     
 def get_book_text(path):    
@@ -27,14 +27,12 @@ def count_words(text):
 
 def count_characters(text):
     dict = {}
-    for words in text.lower().split():
-        for character in words:
-            if character in dict:
-                dict[character] += 1
-            else:
-                dict[character] = 1
+    for character in text.lower():
+        if character in dict:
+            dict[character] += 1
+        else:
+            dict[character] = 1
     return dict
-        
 
 
 main()
