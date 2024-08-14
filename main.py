@@ -4,10 +4,10 @@ def main():
     word_count = count_words(text)
     character_count = count_characters(text)
 
-#   --- REPORT ---
+    # Sorted list of dictionarys with key (character) and value (character count), only alphabet
     char_list = [{"char": key, "count": value} for key, value in character_count.items() if key.isalpha()]
-    def sort_on(char_list):
-        return char_list["count"]
+    
+#   --- REPORT ---
     print(f"--- Begin report of {book_path} ---")
     print(f"""{word_count} words found in the document
           """)
@@ -17,7 +17,9 @@ def main():
           --- End report ---""")
 
 #   --- FUNCTIONS ---    
-
+def sort_on(char_list):
+    return char_list["count"]
+    
 def get_book_text(path):    
     with open(path) as f:
         return f.read()
