@@ -3,9 +3,7 @@ def main():
     text = get_book_text(book_path)
     word_count = count_words(text)
     character_count = count_characters(text)
-    report = gen_report(character_count)
-    # print(f"Word count: {word_count}")
-    # print(f"Character count: {character_count}")
+    report = gen_report(character_count, book_path, word_count)
     print(f"Report: {report}")
     
     
@@ -15,16 +13,7 @@ def get_book_text(path):
 
 def count_words(text):
     words = text.split()
-    count = 0
-    for word in words:
-        count += 1
-    return count
-
-# Short count_words function
-#
-# def get_num_words(text):
-#    words = text.split()
-#    return len(words)
+    return len(words)
 
 def count_characters(text):
     dict = {}
@@ -35,8 +24,18 @@ def count_characters(text):
             dict[character] = 1
     return dict
 
-def gen_report(dict):
+def gen_report(dict, book, word):
     char_list = [{"char": key, "count": value} for key, value in dict.items() if key.isalpha()]
-    return char_list
+    def sort_on(char_list):
+        return char_list["count"]
+    print(f"--- Begin report of {book} ---")
+    print(f"""{word} words found in the document
+          """)
+    for char in sorted(char_list, reverse=True, key=sort_on):
+        char_type = char["char"]
+        char_count = char["count"]
+        print(f"The {char_type} character was found {char_count} times")
+    print("""
+          --- End report ---""")
 
 main()
