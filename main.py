@@ -1,7 +1,22 @@
+import argparse
 def main():
-    book_path = "books/frankenstein.txt"
+    # book_path = "books/frankenstein.txt"
+    # book_path = input("Enter book path: ")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("book_path_arg", help="Type the book location")
+    args = parser.parse_args()
+    
+    book_path = args.book_path_arg
+
+    
     text = get_book_text(book_path)
-    word_count = count_words(text)
+
+    try:
+        word_count = count_words(text)
+    except Exception as e:
+        print(e)
+
+
     character_count = count_characters(text)
 
     # Sorted list of dictionarys with key (character) and value (character count), only alphabet
@@ -27,6 +42,7 @@ def get_book_text(path):
 def count_words(text):
     words = text.split()
     return len(words)
+    raise Exception("Invalid path or file format")
 
 def count_characters(text):
     dict = {}
