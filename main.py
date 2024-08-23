@@ -1,22 +1,29 @@
 import argparse
+import os
+
 def main():
-    # book_path = "books/frankenstein.txt"
-    # book_path = input("Enter book path: ")
+    # Create argument parser
     parser = argparse.ArgumentParser()
+
+    # Define the required positional argument for the file path
     parser.add_argument("book_path_arg", help="Type the book location")
+
+    # Parse the command-line arguments
     args = parser.parse_args()
     
     book_path = args.book_path_arg
 
+    # Check if the file path has a .txt extension
+    if not book_path.endswith(".txt"):
+        raise ValueError(f"Invalid file type: '{book_path}'. Please provide a .txt file.")
     
+    # Check if the file exists
+    if not os.path.isfile(book_path):
+        raise FileNotFoundError(f"The file '{book_path}' does not exist or the path is incorrect.")
+
     text = get_book_text(book_path)
 
-    try:
-        word_count = count_words(text)
-    except Exception as e:
-        print(e)
-
-
+    word_count = count_words(text)
     character_count = count_characters(text)
 
     # Sorted list of dictionarys with key (character) and value (character count), only alphabet
@@ -42,7 +49,6 @@ def get_book_text(path):
 def count_words(text):
     words = text.split()
     return len(words)
-    raise Exception("Invalid path or file format")
 
 def count_characters(text):
     dict = {}
